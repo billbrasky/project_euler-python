@@ -25,28 +25,26 @@ What is the value of the first triangle number to have over five hundred
 divisors?
 """
 
-
+from math import sqrt
 def findDivisors(n):
     k = 1
     div_res = 0
-    max = n
-    while k < max/2:
+    while k <= sqrt(n):
         if n%k == 0:
-            print k, n/k
             if k != n/k:
                 div_res += 2
             else:
                 div_res += 1
-            n = n/k
         k+=1
     return div_res
-i = 3
-n = 3
-divisors = 10
-while divisors < 5:
-    n += i
-    divisors = findDivisors(n)
-    i += 1
 
-findDivisors(15)
+n = 1
+i = 2
+divisors = 0
+while divisors < 500:
+    n += i
+    i += 1
+    divisors = findDivisors(n)
+
+print n
 
