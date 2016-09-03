@@ -25,19 +25,18 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 collatz_dic = {1: [1],
                2: [2, 1],
                3: [3, 10, 5, 16, 8, 4, 2, 1]}
+
 n = 2
 res = (n,2)
-while n < 1000:
+while n < 10000:
     m = n
     collatz_seq = [n]
-    collatz_keys = collatz_dic.keys()
     while m > 1:
         if m%2 == 0:
             m = m/2
         else:
             m = 3*m+1
-
-        if m in collatz_keys:
+        if m < len(collatz_dic.keys()):
             collatz_seq += collatz_dic[m]
             m = 1
         else:
@@ -48,11 +47,6 @@ while n < 1000:
         res = (n, len(collatz_seq))
     n += 1
         
-print res
-for key in collatz_dic.keys():
-    print '-------------------'
-    print key
-    print '----'
-    for x in collatz_dic[key]:
-        print x
+print res[0]
+
     
