@@ -1,0 +1,17 @@
+"""
+Project Euler Problem 20
+========================
+
+n! means n * (n - 1) * ... * 3 * 2 * 1
+
+Find the sum of the digits in the number 100!
+"""
+
+
+from math import factorial
+
+s = str(factorial(100))
+
+sa = [int(letter) for letter in s]
+
+print sum(sa)
