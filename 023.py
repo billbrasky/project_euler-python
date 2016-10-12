@@ -37,7 +37,7 @@ def divisors(n):
                 s += i+n/i
     return s-n
 
-abundNum = []
+abundNum = [0]
 res = 0
 
 numList = [1 for i in xrange(28123)]
@@ -56,11 +56,22 @@ for n in xrange(1,len(numList)):
 
 #print len(abundNum)
 #print numList
-"""
-for n in abundNum:
-    k = n
-    while k < len(numList):
-        if numList[k-1] == 0 or numList[k-1]%n == 0:
-            numList[k-1] == 0
-        k -= 1
-"""
+print abundNum[:50]
+abundSum = {0: 1}
+c = 1
+for i in xrange(len(abundNum)):
+    j = i
+    for i in xrange(len(abundNum)):
+        sval = abundNum[i]+abundNum[j]
+        #print sval
+        if sval > 28123:
+            break
+        if abundSum.get(sval, 0) == 1:
+            abundSum.update({sval: 0})
+
+res = 0
+for i in xrange(28123):
+    if abundSum.get(i, 0) == 1:
+        res += i
+    
+print res
