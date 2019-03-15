@@ -36,11 +36,17 @@ for divisor in range( 2, 1000 ):
     start = 10**mult
     dividend = 10**mult
     ds = []
+    counter = 0
     while True:
-        if divisor == 901: print( dividend )
         if dividend in ds:
-            ds
+            ds = []
+            a = dividend//divisor
+#            seq.append( a )
+            counter += 1
+            seq.append( '-' )
+        if counter == 2:
             break
+
         ds.append( dividend )
         test = dividend//divisor
         if test == 0:
@@ -51,21 +57,22 @@ for divisor in range( 2, 1000 ):
         seq.append( dividend//divisor )
 
         dividendfront = dividend - test * divisor
-        dividend = dividendfront*10**zeros
         zeros = 1
+        dividend = dividendfront*10**zeros
 #        print( dividend )
-        if dividendfront*10*zeros == start:
-            break
+#        if dividendfront*10*zeros == start:
+#            break
 
 
         if dividendfront == 0:
             repeat = False
             break
    
-    print( ''.join([str(x) for x in seq]), divisor )
     if repeat:
-        if len( seq ) > res[1]:
-            res = (divisor, len( seq ))
-            
+        rp = seq[seq.index( '-' ) + 1:-1]
+#       print( ''.join([str(x) for x in seq]),rp, divisor )
+        if len( rp ) > res[1]:
+            res = (divisor, len( rp ))
+
 print( res )
             
