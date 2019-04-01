@@ -61,3 +61,26 @@ def getfactors( n, primefactors = True, testprime = False, countonly = False ):
 				
 		return res
 		#return( list( set( res )))
+		
+
+def getprimes( n ):
+    
+    l = [0, 0] + [1] * ( n - 1 )
+    
+    i = 2
+
+    primes = []
+    
+    while i <= n:
+        
+        if l[i] == 1:
+        
+            primes.append( i )
+            for j in range( i + i, n + 1, i ):
+                
+                l[j] = 0
+
+        i += 1
+                
+    return primes
+                    

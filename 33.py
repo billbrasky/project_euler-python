@@ -49,5 +49,12 @@ for x in range( 11, 100 ):
         if ratio == funnyratio:
             res.append( (x,y) )
 
-        
+top = bottom = 1
+
+for x in res:
+    top *= x[0]
+    bottom *= x[1]
+    
+print( ( top/bottom ) ** ( -1 ))
+
         
