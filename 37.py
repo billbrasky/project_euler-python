@@ -18,12 +18,17 @@ from functions import getfactors
 n = 10
 counter = 0
 res = 0
+checked = {}
 while True:
     n += 1
 
     s = str( n )
 
-    if re.search( r'([02468]|^(3[39]|1|9|\d+5)|(1|9|[39]3)$)', s ) is not None:
+    regex = r'(\d+[02468]|' \
+            r'^(3[39]+|1|9|\d+5)|' \
+            r'(1|9|[39]+3)$)'
+
+    if re.search( regex, s ) is not None:
         continue
     
     prime = getfactors( n, testprime = True )
@@ -32,22 +37,41 @@ while True:
         continue
 
     moveon = False
-    digitsum = sum( [int( x ) for x in s] )
+#    digitsum = sum( [int( x ) for x in s] )
+    lrs = 0
+    rrs = 0
     for i in range( len( s ) - 1 ):
+        lrs += int( s[i] )
+        rrs += int( s[-i - 1 ] )
         
         left = s[:i+1]
         right = s[len( s ) - i - 1:]
-
-        leftprime = getfactors( int( left ), testprime = True )
         
-        if leftprime:
-            rightprime = getfactors( int( right ), testprime = True )
-            
-            if not rightprime:
+        if lrs % 9 == 0 or rrs % 9 == 0:
+#                print( s )
                 moveon = True
                 break
-        else:
-            moveon = True
+    
+        
+        testarray = [int( left )]
+        
+        if left[::-1] != right:
+            testarray.append( int( right ))
+
+        for testvalue in testarray:
+        
+            prime = checked.get( testvalue )
+
+            if prime is None:
+                p = getfactors( int( testvalue ), testprime = True )
+                checked[testvalue] = p
+                prime = p
+
+            if not prime:
+                moveon = True
+                break
+         
+        if moveon:
             break
             
             
@@ -55,7 +79,7 @@ while True:
         continue
     
     counter += 1
-    print( n )
+    print( '----',n )
     res += n
     
     if counter == 11:
