@@ -110,21 +110,21 @@ data = [[int( x[i:i+10] ) for i in range(5)] for x in data]
 resa = [0]*5
 
 for row in data:
-	
-	for i in range( 5 ):
-		
-		resa[i] += row[i]
-		
+    
+    for i in range( 5 ):
+        
+        resa[i] += row[i]
+        
 res = resa
 for i in range( 1, len( res )):
-	r = res[-i]
-	
-	s = str( r )
-	addition = s[:len(s)-10]
-	
-	if addition != '':
-		res[-i - 1] += int( addition )
-	
-	
+    r = res[-i]
+    
+    s = str( r )
+    addition = s[:len(s)-10]
+    
+    if addition != '':
+        res[-i - 1] += int( addition )
+    
+    
 print( str( res[0] )[:10] )
 

@@ -33,64 +33,64 @@ data = data.split( '\n' )[4:-6]
 
 data = [[int( y ) for y in x.split( ' ' )] for x in data]
 
-nrow = len( data )
-ncol = len( data[0] )
-res = 0
 
 def prod( a ):
-	
-	res = 1
-	
-	for thing in a:
-		res *= thing
+    
+    res = 1
+    
+    for thing in a:
+        res *= thing
 
-	return res
+    return res
 
-for r in range( nrow ):
-	
-	row = data[r]
-	
-	for c in range( ncol ):
-		toright = False
-		todown = False
-		toup = False
-		
-		tempres = []
-		
-		if c + 4 < ncol:
-			
-			test = prod( row[r:r + 4] )
-			toright = True
-			
-			tempres.append( test )
-			
-		if r + 4 < nrow:
-			
-			test = prod( [data[x][c] for x in range( r, r + 4 )] )
-			todown = True
+def run():
+    nrow = len( data )
+    ncol = len( data[0] )
+    res = 0
 
-			tempres.append( test )
-			
-		if toright and todown:
-		
-			test = prod( [data[x][x] for x in range( r, r + 4 )] )
+    for r in range( nrow ):
+    
+        row = data[r]
+        
+        for c in range( ncol ):
+            toright = False
+            todown = False
+            toup = False
+            
+            tempres = []
+            
+            if c + 4 < ncol:
+                
+                test = prod( row[r:r + 4] )
+                toright = True
+                
+                tempres.append( test )
+                
+            if r + 4 < nrow:
+                
+                test = prod( [data[x][c] for x in range( r, r + 4 )] )
+                todown = True
 
-			tempres.append( test )
+                tempres.append( test )
+                
+            if toright and todown:
+            
+                test = prod( [data[x][x] for x in range( r, r + 4 )] )
 
-		if toright and r - 4 >= 0:
+                tempres.append( test )
 
-			test = prod( [data[r-x][c+x] for x in range(4)] )
+            if toright and r - 4 >= 0:
 
-			tempres.append( test )
-			
-			
-		if tempres != [] and max( tempres ) > res:
-			
-				res = max( tempres )
-			
+                test = prod( [data[r-x][c+x] for x in range(4)] )
 
-			
-print( res )	
-			
-		
-		
+                tempres.append( test )
+                
+                
+            if tempres != [] and max( tempres ) > res:
+                
+                    res = max( tempres )
+                
+    return res
+
+if __name__ == '__main__':
+    print( run())

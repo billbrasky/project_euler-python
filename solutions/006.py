@@ -12,12 +12,17 @@ Find the difference between the sum of the squares of the first one hundred
 natural numbers and the square of the sum.
 """
 
-n = 100
 
-squareofsum = ( n/2 * ( 1 + n ))**2
+def run():
+    n = 100
 
-sumofsquares = n * ( n + 1 ) * ( 2 * n + 1 ) / 6
+    squareofsum = ( n // 2 * ( 1 + n ))**2
+
+    sumofsquares = n * ( n + 1 ) * ( 2 * n + 1 ) // 6
 
 
-print( squareofsum - sumofsquares )
+    return squareofsum - sumofsquares
 
+
+if __name__ == '__main__':
+    print( run())

@@ -1,0 +1,79 @@
+#! bin/python
+
+import sys, re
+import os, importlib
+
+args = sys.argv
+
+if len( args ) <= 1:
+    print( 'Please specifiy the problem number to test.' )
+    print( 'Ex. ./run 23' )
+    exit()
+
+test = args[1]
+
+if re.match( r'\d{1,3}', test ) is None:
+    print( f'The problem number {test} is not a suitable option.' )
+    print( 'Try a natural number.' )
+    exit()
+
+while len( test ) != 3:
+    test = '0' + test
+
+
+testpath = f'solutions/{test}.py'
+importpath = f'solutions.{test}'
+
+
+def getAnswers():
+    answers = {}
+
+    with open( 'data/answers.txt', newline = '' ) as f:
+        for line in f:
+            m = re.search( r'Problem (\d{3}): (.*)', line )
+
+            problem = m.group(1)
+            answer = m.group(2)
+
+            answers[problem] = answer
+        
+    return answers        
+
+
+
+answers = getAnswers()
+
+
+if os.path.exists( testpath ):
+    module = importlib.import_module( importpath )
+
+    my_answer = str( module.run())
+    answer = answers[test]
+
+    if my_answer == answer:
+        print( 'CORRECT!' )
+        print( f'{my_answer} == {answer}' )
+    
+    else:
+        print( 'INCORRECT!' )
+        print( f'{my_answer} != {answer}' )
+
+
+
+
+# name=$1
+
+# if [ ${#1} -eq 1 ]; then
+
+#     name="00${1}"
+
+# elif [ ${#1} -eq 2 ]; then
+#     name="0${1}"
+
+# else
+#     name=$1
+# fi
+
+# path="solutions/${name}.py"
+
+# python $path

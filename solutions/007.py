@@ -5,24 +5,25 @@ the 6th prime is 13.
 What is the 10 001st prime number?
 """
 
-from functions import getfactors
+from solutions.functions import getfactors
 
-counter = 0
+def run():
+    counter = 1
+    i = 3
 
-i = 3
+    while True:
 
-primes = []
+        if getfactors( i, primefactors = False, testprime = True ):
+        
+            counter += 1
+        
+        if counter == 10001:
+        
+            return i
+            break
 
-while True:
+        i += 1
 
-	if getfactors( i, prime = True ) == []:
-	
-		counter += 1
-	
-	if counter == 10000:
-	
-		print( i )
-		break
 
-	i += 2
-
+if __name__ == '__main__':
+    print( run())

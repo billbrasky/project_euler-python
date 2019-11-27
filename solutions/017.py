@@ -12,56 +12,56 @@ The use of "and" when writing out numbers is in compliance with British usage.
 
 
 data = [
-	'',
-	'one',
-	'two',
-	'three',
-	'four',
-	'five',
-	'six',
-	'seven',
-	'eight',
-	'nine',
-	'ten',
-	'eleven',
-	'twelve'
+    '',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'ten',
+    'eleven',
+    'twelve'
 ]
 
 
 def zeroto99( i, data ):
 
-	prefix = {
-		2: 'twen',
-		3: 'thir',
-		4: 'for',
-		5: 'fif',
-		6: 'six',
-		7: 'seven',
-		8: 'eigh',
-		9: 'nine'
-	}
-	teen = 'teen'
+    prefix = {
+        2: 'twen',
+        3: 'thir',
+        4: 'for',
+        5: 'fif',
+        6: 'six',
+        7: 'seven',
+        8: 'eigh',
+        9: 'nine'
+    }
+    teen = 'teen'
 
-	res = ''
-	n = i%100
-	
-	if n <= 12:
-		
-		res += data[n]
-		
-	elif 12 < n <= 19:
-		
-		res += prefix[n%10] + teen
-		
-		if n == 14:
-			res += 'u'
-		
-	elif 19 < n <= 99:
-		
-		res += prefix[n//10] + 'ty' + data[n%10]
+    res = ''
+    n = i%100
+    
+    if n <= 12:
+        
+        res += data[n]
+        
+    elif 12 < n <= 19:
+        
+        res += prefix[n%10] + teen
+        
+        if n == 14:
+            res += 'u'
+        
+    elif 19 < n <= 99:
+        
+        res += prefix[n//10] + 'ty' + data[n%10]
 
-	return res
-	
+    return res
+    
 hundy = 'hundred'
 thou = 'thousand'
 andy = 'and'
@@ -69,23 +69,23 @@ res = 0
 
 
 for i in range( 1, 1000 ):
-	
-	if i <= 99:
-		word = zeroto99( i, data )
-		
-	elif 99 < i <= 999:
-		
-		word = data[i//100] + hundy
-		
-		if i % 100 != 0:
-			word += andy
-		
-		word += zeroto99( i, data )
-		
-	#print( word )
-	res += len( word )
+    
+    if i <= 99:
+        word = zeroto99( i, data )
+        
+    elif 99 < i <= 999:
+        
+        word = data[i//100] + hundy
+        
+        if i % 100 != 0:
+            word += andy
+        
+        word += zeroto99( i, data )
+        
+    #print( word )
+    res += len( word )
 
 res += len( data[1] + thou )
-	
+    
 print( res )
-	
+    

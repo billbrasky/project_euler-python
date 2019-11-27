@@ -30,39 +30,43 @@ product. What is the value of this product?
 data = ''.join( data.split( '\n' )[4:-4] )
 
 def prod( a ):
-	
-	res = 1
-	
-	for thing in a:
+    
+    res = 1
+    
+    for thing in a:
 
-		res *= thing
+        res *= thing
 
-	return res
-
-hmax = 0
-stopper = 13
-m = len( data )
+    return res
 
 
-i = 0
-while i + stopper < m:
-	subsection = data[i:i + stopper ]
-	
-	if '0' in subsection:
-		i += 1				
-		continue
+def run():
+    hmax = 0
+    stopper = 13
+    m = len( data )
 
-	subsection = [int( x ) for x in subsection ]
 
-	newhmax = prod( subsection )
-	
-	if newhmax > hmax:
-		
-		hmax = newhmax
+    i = 0
+    while i + stopper < m:
+        subsection = data[i:i + stopper ]
+        
+        if '0' in subsection:
+            i += 1                
+            continue
 
-	i += 1				
+        subsection = [int( x ) for x in subsection ]
 
-print( hmax )
-		
-					
+        newhmax = prod( subsection )
+        
+        if newhmax > hmax:
+            
+            hmax = newhmax
 
+        i += 1
+
+    return hmax
+        
+                    
+
+if __name__ == '__main__':
+    print( run())

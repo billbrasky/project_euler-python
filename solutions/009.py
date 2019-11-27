@@ -23,23 +23,27 @@ Find the product abc.
 
 import math
 
-i = 1
+def run():
+    i = 1
 
-while True:
-	val = math.sqrt( i**2 + 2000 )
-	
-	if math.floor( val ) == val:
-		
-		break
-		
-	i += 1
-	
-n = i
+    while True:
+        val = math.sqrt( i**2 + 2000 )
+        
+        if math.floor( val ) == val:
+            
+            break
+            
+        i += 1
+        
+    n = i
 
-m = -n/2 + val/2
+    m = ( -n + val ) // 2
 
-a = m**2 - n**2
-b = 2*m*n
-c = m**2 + n**2
+    a = m**2 - n**2
+    b = 2*m*n
+    c = m**2 + n**2
 
-print( a*b*c )
+    return int( a*b*c )
+
+if __name__ == '__main__':
+    print( run())

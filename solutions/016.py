@@ -9,6 +9,6 @@ m = str( 2**1000 )
 res = 0
 
 for char in m:
-	res += int( char )
-	
+    res += int( char )
+    
 print( res )

@@ -20,13 +20,13 @@ import time
 start = time.time()
 
 def collatz( n ):
-	
-	if n%2 == 0:
-		return n//2
-		
-	else:
-		return 3 * n + 1
-		
+    
+    if n%2 == 0:
+        return n//2
+        
+    else:
+        return 3 * n + 1
+        
 
 collatzdic = {}
 
@@ -34,27 +34,27 @@ i = 2
 res = (0,0)
 while i < 10**6:
 
-	m = i
-	
-	counter = 1
-	
-	while m != 1:
-	
-		counter += 1
+    m = i
+    
+    counter = 1
+    
+    while m != 1:
+    
+        counter += 1
 
-		m = collatz( m )
-		if collatzdic.get( m ) is not None:
-			
-			counter += collatzdic[m]
-			m = 1
-	
-	
-	
-	if counter > res[1]:
-		res = (i, counter)
-		
-	collatzdic[i] = counter
-	i += 1
+        m = collatz( m )
+        if collatzdic.get( m ) is not None:
+            
+            counter += collatzdic[m]
+            m = 1
+    
+    
+    
+    if counter > res[1]:
+        res = (i, counter)
+        
+    collatzdic[i] = counter
+    i += 1
 
 print( res[0] )
 

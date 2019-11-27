@@ -4,8 +4,12 @@ import math
 def getfactors( n, primefactors = True, testprime = False, countonly = False ):
 
     m = n
-    res = [1,n]
     counter = 2
+
+    if primefactors:
+        res = []
+    else:
+        res = [1,n]
     
     for i in range( 2, math.floor( math.sqrt( n )) + 1 ):
 #        print( i )
@@ -25,10 +29,12 @@ def getfactors( n, primefactors = True, testprime = False, countonly = False ):
                 
                 if value in res:
                     break
-                res.append( value )
+                if getfactors( value, False, testprime = True):
+                    res.append( value )
                 
                 if value != n//value:
-                    res.append( n//value )
+                    if getfactors( n//value, False, testprime = True):
+                        res.append( n//value )
                 
 
             m = m//i

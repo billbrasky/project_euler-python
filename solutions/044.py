@@ -12,3 +12,8 @@ are pentagonal and D = |P_k − P_j| is minimised; what is the value of D?
 """
 
 
+def pentagon( n ):
+    return n / 2 * ( 3 * n - 1 )
+
+
+print( pentagon( 2 ))

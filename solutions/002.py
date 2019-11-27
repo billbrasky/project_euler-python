@@ -9,21 +9,24 @@ By considering the terms in the Fibonacci sequence whose values do not exceed
 four million, find the sum of the even-valued terms.
 """
 
-z = 0
-m = 1
-n = 1
+def run():
+    z = 0
+    m = 1
+    n = 1
 
-res = 0
+    res = 0
 
-while m < 4*10**6:
-	
-	z = m + n
-	m = n
-	n = z
-	
-	if n%2 == 0:
+    while m < 4*10**6:
+        
+        z = m + n
+        m = n
+        n = z
+        
+        if n%2 == 0:
 
-		res += n
-	
-print( res )
+            res += n
+        
+    return res
 
+if __name__ == '__main__':
+    print( run())
