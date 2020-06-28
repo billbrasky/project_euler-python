@@ -1,7 +1,8 @@
-#! bin/python
+#! python
 
 import sys, re
 import os, importlib
+import time
 
 args = sys.argv
 
@@ -47,12 +48,15 @@ answers = getAnswers()
 if os.path.exists( testpath ):
     module = importlib.import_module( importpath )
 
+    start = time.time()
     my_answer = str( module.run())
+    duration = time.time() - start
     answer = answers[test]
 
     if my_answer == answer:
         print( 'CORRECT!' )
         print( f'{my_answer} == {answer}' )
+        print( duration )
     
     else:
         print( 'INCORRECT!' )
