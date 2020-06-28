@@ -20,7 +20,7 @@ We can see that 28 is the first triangle number to have over five divisors.
 What is the value of the first triangle number to have over five hundred divisors?
 """
 
-from solutions.functions import getfactors
+from functions import getfactors
 import math
 import time
 
@@ -46,7 +46,6 @@ def run():
 
 		if factorcount > 500:
 			return math.floor( n / 2 * ( n + 1 ))
-			break
 
 		even = ( even + 1 ) % 2
 			

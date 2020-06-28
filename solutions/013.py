@@ -107,24 +107,27 @@ data = data.split( '\n' )[3:-1]
 
 data = [[int( x[i:i+10] ) for i in range(5)] for x in data]
 
-resa = [0]*5
+def run( data: int[] ) -> str:
+    resa = [0]*5
 
-for row in data:
-    
-    for i in range( 5 ):
+    for row in data:
         
-        resa[i] += row[i]
+        for i in range( 5 ):
+            
+            resa[i] += row[i]
+            
+    res = resa
+    for i in range( 1, len( res )):
+        r = res[-i]
         
-res = resa
-for i in range( 1, len( res )):
-    r = res[-i]
-    
-    s = str( r )
-    addition = s[:len(s)-10]
-    
-    if addition != '':
-        res[-i - 1] += int( addition )
-    
-    
-print( str( res[0] )[:10] )
+        s = str( r )
+        addition = s[:len(s)-10]
+        
+        if addition != '':
+            res[-i - 1] += int( addition )
+        
+        
+    return str( res[0] )[:10]
 
+if if __name__ == "__main__":
+    print( run( data ))

@@ -16,10 +16,8 @@ Which starting number, under one million, produces the longest chain?
 NOTE: Once the chain starts the terms are allowed to go above one million.
 """
 
-import time
-start = time.time()
 
-def collatz( n ):
+def collatz( n: int ) -> int:
     
     if n%2 == 0:
         return n//2
@@ -28,34 +26,36 @@ def collatz( n ):
         return 3 * n + 1
         
 
-collatzdic = {}
+def run() -> str:
+    collatzdic = {}
 
-i = 2
-res = (0,0)
-while i < 10**6:
+    i = 2
+    res = (0,0)
+    while i < 10**6:
 
-    m = i
-    
-    counter = 1
-    
-    while m != 1:
-    
-        counter += 1
-
-        m = collatz( m )
-        if collatzdic.get( m ) is not None:
-            
-            counter += collatzdic[m]
-            m = 1
-    
-    
-    
-    if counter > res[1]:
-        res = (i, counter)
+        m = i
         
-    collatzdic[i] = counter
-    i += 1
+        counter = 1
+        
+        while m != 1:
+        
+            counter += 1
 
-print( res[0] )
+            m = collatz( m )
+            if collatzdic.get( m ) is not None:
+                
+                counter += collatzdic[m]
+                m = 1
+        
+        
+        
+        if counter > res[1]:
+            res = (i, counter)
+            
+        collatzdic[i] = counter
+        i += 1
 
-print( time.time() - start )
+    return str( res[0] )
+
+if if __name__ == "__main__":
+    print( run())
