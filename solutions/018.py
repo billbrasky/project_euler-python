@@ -36,24 +36,24 @@ clever method! ;o)
 import heapq
 
 class SquareGrid:
-    def __init__( self, data):
+    def __init__( self, data: str ):
         
         self.width = len( data[-2] )
         self.height = len( data )
         self.data = data
         self.walls = []
     
-    def in_bounds(self, id):
+    def in_bounds( self, id: list ):
         (x, y) = id
         h = self.height
         w = self.width
         
         return 0 <= x < h and 0 <= y < w #and x+y <= h
     
-    def passable(self, id):
+    def passable( self, id: list ):
         return id not in self.walls
     
-    def neighbors(self, id):
+    def neighbors( self, id: list ):
         (x, y) = id
         results = [(x,y+1),(x+1,y)]#[(x+1, y), (x, y-1),(x, y-1), (x, y+1)]
 #        if x == self.height - 2:
@@ -64,22 +64,22 @@ class SquareGrid:
 #        results = filter(self.passable, results)
         return results
 
-class GridWithWeights(SquareGrid):
-    def __init__(self, data):
-        super().__init__(data)
+class GridWithWeights( SquareGrid ):
+    def __init__( self, data: str ):
+        super().__init__( data )
 
         self.weights = {}
         
         for h in range( self.height ):
-#            print( self.data[h])
+#            print( self.data[h] )
             for w in range( len( self.data[h] )):
                 
                 self.weights[(h, w)] = int( self.data[h][w] )
                 
             
     
-    def cost(self, from_node, to_node):
-        cost = self.weights.get(to_node, 0)#+self.weights.get(from_node, 0)
+    def cost( self, from_node, to_node ):
+        cost = self.weights.get( to_node, 0 )#+self.weights.get(from_node, 0)
 #        print( from_node, to_node, cost)
         return cost
 
@@ -90,18 +90,18 @@ class PriorityQueue:
     def empty( self ):
         return len( self.elements ) == 0
     
-    def put( self, item, priority ):
+    def put( self, item: int, priority: int ):
         heapq.heappush( self.elements, ( priority, item ))
     
     def get( self ):
         return heapq.heappop( self.elements )[1]
 
-def heuristic( a, b, graph ):
+def heuristic( a: int , b: int , graph: SquareGrid ):
     (x1, y1) = a
     (x2, y2) = b
     return abs(x1 - x2) + abs(y1 - y2)
 
-def a_star_search( graph, start, goal ):
+def a_star_search( graph: SquareGrid, start: int, goal: int ):
     frontier = PriorityQueue()
     frontier.put( start, 0 )
     came_from = {}
@@ -114,7 +114,7 @@ def a_star_search( graph, start, goal ):
         print( current )
         if current == goal:
             break
-#        print( 'd',current, list(graph.neighbors( current )))
+#        print( 'd',current, List(graph.neighbors( current )))
         for next in graph.neighbors( current ):
             new_cost = cost_so_far[current] + graph.cost( current, next )
             if next not in cost_so_far or new_cost > cost_so_far[next]:
@@ -124,7 +124,8 @@ def a_star_search( graph, start, goal ):
                 came_from[next] = current
     
     return came_from, cost_so_far
-def reconstruct_path(came_from, start, goal):
+
+def reconstruct_path( came_from: dict, start: int, goal: int ):
     current = goal
     path = []
     while current != start:
@@ -135,10 +136,10 @@ def reconstruct_path(came_from, start, goal):
     path.reverse() # optional
     return path
 
-def from_id_width(id, width):
+def from_id_width( id: list, width: int ):
     return (id % width, id // width)
 
-def draw_tile(graph, id, style, width):
+def draw_tile( graph: SquareGrid, id: list, style: dict, width: int ):
     r = "."
     if 'number' in style and id in style['number']: r = "%d" % style['number'][id]
     if 'point_to' in style and style['point_to'].get(id, None) is not None:
@@ -154,7 +155,7 @@ def draw_tile(graph, id, style, width):
     if id in graph.walls: r = "#" * width
     return r
 
-def draw_grid(graph, width=2, **style):
+def draw_grid( graph: SquareGrid, width: int = 2, **style: dict):
     for x in range(graph.height):
         for y in range(graph.width):
 #            if x == 0 and y > 0: break
@@ -170,27 +171,31 @@ def draw_grid(graph, width=2, **style):
 #    [2, 4, 6],
 #    [8, 5, 9, 3]
 #]
-data = data.split( '\n' )[13:-6]
-print( data )
-data = [x.split( ' ' ) for x in data]
-i = -1
-m = len( data )
-newdata = []
-while i >= -m:
-    x = [data[y][i] for y in range( abs(i)-1, m )] + [0]*( abs(i)-1)
-    newdata.append( x )
-    i -= 1
+def run():
+    global data
+    data = data.split( '\n' )[13:-6]
+    print( data )
+    return 
+    data = [x.split( ' ' ) for x in data]
+    i = -1
+    m = len( data )
+    newdata = []
+    while i >= -m:
+        x = [data[y][i] for y in range( abs(i)-1, m )] + [0]*( abs(i)-1)
+        newdata.append( x )
+        i -= 1
 
-data = newdata
-from pprint import pprint
+    data = newdata
+    from pprint import pprint
 
-g = GridWithWeights( data)
-
-
-start, goal = (0, 0), (len(data)-1, len( data ) -1)
-
-cf, cost = a_star_search( g, start, goal )
-
-draw_grid(g,width=10,path=reconstruct_path(cf,start, goal))
+    g = GridWithWeights( data)
 
 
+    start, goal = (0, 0), (len(data)-1, len( data ) -1)
+
+    cf, cost = a_star_search( g, start, goal )
+
+    draw_grid(g,width=10,path=reconstruct_path(cf,start, goal))
+
+if __name__ == "__main__":
+    run()

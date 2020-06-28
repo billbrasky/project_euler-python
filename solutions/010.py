@@ -5,7 +5,7 @@ Find the sum of all the primes below two million.
 """
 
 
-def run():
+def run() -> int:
     array = [1]*2*10**6
     res = 0
 

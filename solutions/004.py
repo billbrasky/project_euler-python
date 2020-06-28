@@ -8,7 +8,7 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 from solutions.functions import getfactors
 
 
-def run():
+def run() -> int:
     m = 999999
 
     while True:

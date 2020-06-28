@@ -28,7 +28,7 @@ data = [
 ]
 
 
-def zeroto99( i, data ):
+def zeroto99( i: int, data: list ) -> str:
 
     prefix = {
         2: 'twen',
@@ -61,31 +61,34 @@ def zeroto99( i, data ):
         res += prefix[n//10] + 'ty' + data[n%10]
 
     return res
-    
-hundy = 'hundred'
-thou = 'thousand'
-andy = 'and'
-res = 0
+
+def run() -> int:
+    hundy = 'hundred'
+    thou = 'thousand'
+    andy = 'and'
+    res = 0
 
 
-for i in range( 1, 1000 ):
-    
-    if i <= 99:
-        word = zeroto99( i, data )
+    for i in range( 1, 1000 ):
         
-    elif 99 < i <= 999:
-        
-        word = data[i//100] + hundy
-        
-        if i % 100 != 0:
-            word += andy
-        
-        word += zeroto99( i, data )
-        
-    #print( word )
-    res += len( word )
+        if i <= 99:
+            word = zeroto99( i, data )
+            
+        elif 99 < i <= 999:
+            
+            word = data[i//100] + hundy
+            
+            if i % 100 != 0:
+                word += andy
+            
+            word += zeroto99( i, data )
+            
+        #print( word )
+        res += len( word )
 
-res += len( data[1] + thou )
-    
-print( res )
-    
+    res += len( data[1] + thou )
+        
+    return res
+
+if __name__ == "__main__":
+    print( run())

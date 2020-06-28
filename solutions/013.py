@@ -107,7 +107,7 @@ data = data.split( '\n' )[3:-1]
 
 data = [[int( x[i:i+10] ) for i in range(5)] for x in data]
 
-def run( data: int[] ) -> str:
+def run() -> str:
     resa = [0]*5
 
     for row in data:
@@ -129,5 +129,5 @@ def run( data: int[] ) -> str:
         
     return str( res[0] )[:10]
 
-if if __name__ == "__main__":
-    print( run( data ))
+if __name__ == "__main__":
+    print( run())

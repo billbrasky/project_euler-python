@@ -4,11 +4,15 @@
 What is the sum of the digits of the number 2^1000?
 """
 
-m = str( 2**1000 )
+def run() -> int:
+    m = str( 2**1000 )
 
-res = 0
+    res = 0
 
-for char in m:
-    res += int( char )
-    
-print( res )
+    for char in m:
+        res += int( char )
+        
+    return res
+
+if __name__ == "__main__":
+    print( run())

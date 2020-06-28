@@ -7,7 +7,7 @@ What is the largest prime factor of the number 600851475143 ?
 
 from solutions.functions import getfactors
 
-def run():
+def run() -> int:
 
     m = 600851475143
 

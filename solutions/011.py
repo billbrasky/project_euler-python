@@ -34,7 +34,7 @@ data = data.split( '\n' )[4:-6]
 data = [[int( y ) for y in x.split( ' ' )] for x in data]
 
 
-def prod( a ):
+def prod( a: list ) -> int:
     
     res = 1
     
@@ -43,7 +43,7 @@ def prod( a ):
 
     return res
 
-def run():
+def run() -> int:
     nrow = len( data )
     ncol = len( data[0] )
     res = 0
@@ -55,7 +55,6 @@ def run():
         for c in range( ncol ):
             toright = False
             todown = False
-            toup = False
             
             tempres = []
             

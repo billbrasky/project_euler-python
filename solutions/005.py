@@ -9,8 +9,8 @@ numbers from 1 to 20?
 
 from solutions.functions import getfactors
 
-def run():
-    factors = []
+def run() -> int:
+
     res = 1
     for i in range( 1, 21 ):
         

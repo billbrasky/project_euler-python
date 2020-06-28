@@ -30,7 +30,7 @@ and b, for the quadratic expression that produces the maximum number of primes f
 consecutive values of n, starting with n=0.
 """
 
-from functions import getfactors
+from solutions.functions import getfactors
 
 bsource = [0,0] + [1] * 1000
 options = []

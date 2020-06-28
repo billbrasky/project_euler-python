@@ -57,5 +57,5 @@ def run() -> str:
 
     return str( res[0] )
 
-if if __name__ == "__main__":
+if __name__ == "__main__":
     print( run())

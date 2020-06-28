@@ -6,7 +6,7 @@ prime.
 What is the largest n-digit pandigital prime that exists?
 """
 
-from functions import getfactors
+from solutions.functions import getfactors
 import itertools
 
 

@@ -13,7 +13,7 @@ natural numbers and the square of the sum.
 """
 
 
-def run():
+def run() -> int:
     n = 100
 
     squareofsum = ( n // 2 * ( 1 + n ))**2

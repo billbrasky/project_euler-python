@@ -8,5 +8,11 @@ How many such routes are there through a 20×20 grid?
 # follows pascals triangle
 
 from math import factorial
-n = 20
-print( factorial( 2*n ) / ( factorial( n ))**2 )
+
+def run() -> int:
+
+    n = 20
+    return factorial( 2*n ) / ( factorial( n ))**2
+
+if __name__ == "__main__":
+    print( run())

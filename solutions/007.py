@@ -7,7 +7,7 @@ What is the 10 001st prime number?
 
 from solutions.functions import getfactors
 
-def run():
+def run() -> int:
     counter = 1
     i = 3
 
@@ -20,7 +20,6 @@ def run():
         if counter == 10001:
         
             return i
-            break
 
         i += 1
 

@@ -23,7 +23,7 @@ Find the product abc.
 
 import math
 
-def run():
+def run() -> int:
     i = 1
 
     while True:

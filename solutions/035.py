@@ -9,7 +9,7 @@ How many circular primes are there below one million?
 """
 
 
-from functions import getprimes
+from solutions.functions import getprimes
 import re
 
 def rotate( n ):

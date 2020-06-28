@@ -11,7 +11,7 @@ so d(284) = 220.
 Evaluate the sum of all the amicable numbers under 10000.
 """
 
-from functions import getfactors
+from solutions.functions import getfactors
 
 
 m = 10000

@@ -29,7 +29,7 @@ product. What is the value of this product?
 
 data = ''.join( data.split( '\n' )[4:-4] )
 
-def prod( a ):
+def prod( a: list ) -> int:
     
     res = 1
     
@@ -40,7 +40,7 @@ def prod( a ):
     return res
 
 
-def run():
+def run() -> int:
     hmax = 0
     stopper = 13
     m = len( data )
