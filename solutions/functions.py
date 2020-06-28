@@ -1,7 +1,20 @@
 
 import math 
 
-def getfactors( n, primefactors = True, testprime = False, countonly = False ):
+# The goal of this function is to return the factors of a provided natural number 'n'
+#
+# If _primefactors_ is set to False, then all factors will be in the result.
+#
+# If _testprime_ is set to True, then the test will return True or False depending on whether 
+# or not 'n' has more than two factors, including itself and 1.
+#
+# If countonly is True, then it will return the count of factors instead of the entire list.
+
+def getfactors( 
+    n: int, 
+    primefactors: bool = True, 
+    testprime: bool = False, 
+    countonly: bool = False ) -> Union[list, bool, int]:
 
     m = n
     counter = 2
@@ -72,7 +85,10 @@ def getfactors( n, primefactors = True, testprime = False, countonly = False ):
         #return( list( set( res )))
         
 
-def getprimes( n ):
+# The goal of this function is to return a list of all primes up to the provided 
+# natural number 'n'
+
+def getprimes( n: int ) -> list:
     
     l = [0, 0] + [1] * ( n - 1 )
     
