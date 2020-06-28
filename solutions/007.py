@@ -5,7 +5,7 @@ the 6th prime is 13.
 What is the 10 001st prime number?
 """
 
-from solutions.functions import getfactors
+from util.functions import getfactors
 
 def run() -> int:
     counter = 1

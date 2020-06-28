@@ -13,7 +13,7 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 # cannot have any even digits
 
 import re 
-from solutions.functions import getfactors
+from util.functions import getfactors
 
 n = 10
 counter = 0

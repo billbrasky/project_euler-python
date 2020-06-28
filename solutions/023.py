@@ -18,7 +18,7 @@ Find the sum of all the positive integers which cannot be written as the sum of
 two abundant numbers.
 """
 
-from solutions.functions import getfactors
+from util.functions import getfactors
 import time
 
 start = time.time()

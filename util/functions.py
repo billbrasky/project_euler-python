@@ -1,6 +1,6 @@
 
 import math 
-
+from typing import List, Union
 # The goal of this function is to return the factors of a provided natural number 'n'
 #
 # If _primefactors_ is set to False, then all factors will be in the result.
@@ -14,7 +14,7 @@ def getfactors(
     n: int, 
     primefactors: bool = True, 
     testprime: bool = False, 
-    countonly: bool = False ) -> Union[list, bool, int]:
+    countonly: bool = False ) -> Union[List, bool, int]:
 
     m = n
     counter = 2
