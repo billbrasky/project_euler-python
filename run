@@ -15,24 +15,52 @@ if len( args ) <= 1:
 
 tests = args[1:]
 
-def validateTest( tests: List[str] ) -> bool:
+def validateTest( test: str ) -> bool:
+
+
+    if re.match( r'\d{1,3}', test ) is None:
+        print( f'The problem number {test} is not a suitable option.' )
+        print( 'Try a natural number.' )
+        return False
+
+    return True
+    
+def padTestPath( test: str ) -> str:
+
+    while len( test ) != 3:
+        test = '0' + test
+
+    return test
+
+def computeTests( tests: List[str] ) -> None:
 
     for test in tests:
 
-        if re.match( r'\d{1,3}', test ) is None:
-            print( f'The problem number {test} is not a suitable option.' )
-            print( 'Try a natural number.' )
-            exit()
+        test_is_valid = validateTest( test )
+
+        if test_is_valid:
+
+            testpath = f'solutions/{test}.py'
+            importpath = f'solutions.{test}'
+            answers = getAnswers()
+
+            my_answer, duration = getMyAnswer( testpath )
 
 
-def computeTests( tests)
+            answer = answers[test]
+            print( len( my_answer), len( answer ))
+            if my_answer == answer:
+                print( 'CORRECT!' )
+                print( f'{my_answer} == {answer}' )
+                print( duration )
 
-while len( test ) != 3:
-    test = '0' + test
+            else:
+                print( 'INCORRECT!' )
+                print( f'{my_answer} != {answer}' )
 
 
-testpath = f'solutions/{test}.py'
-importpath = f'solutions.{test}'
+
+
 
 
 def getAnswers():
@@ -67,21 +95,6 @@ def getMyAnswer( testpath: str ) -> Tuple( Union[str, None], Union[float, None] 
 
     return (my_answer, duration)
 
-answers = getAnswers()
-
-my_answer, duration = getMyAnswer( testpath )
-
-
-answer = answers[test]
-print( len( my_answer), len( answer ))
-if my_answer == answer:
-    print( 'CORRECT!' )
-    print( f'{my_answer} == {answer}' )
-    print( duration )
-
-else:
-    print( 'INCORRECT!' )
-    print( f'{my_answer} != {answer}' )
 
 
 
