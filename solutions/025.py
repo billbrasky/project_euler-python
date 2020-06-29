@@ -24,14 +24,19 @@ What is the index of the first term in the Fibonacci sequence to contain 1000
 digits?
 """
 
-x = 1
-y = 1
-z = 2
-counter = 3
-while len( str( z )) // 1000 == 0:
+def run() -> int:
+    x = 1
+    y = 1
+    z = 2
+    counter = 3
+    while len( str( z )) // 1000 == 0:
+        
+        x = z
+        z += y
+        y = x
+        counter += 1
     
-    x = z
-    z += y
-    y = x
-    counter += 1
-print( counter )
+    return counter
+
+if __name__ == "__main__":
+    print( run())

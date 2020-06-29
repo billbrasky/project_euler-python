@@ -13,30 +13,32 @@ Evaluate the sum of all the amicable numbers under 10000.
 
 from util.functions import getfactors
 
+def run() -> int:
+    m = 10000
+    a = [True]*( m )
 
-m = 10000
-a = [True]*( m )
-
-res = 0
-for i in range( 1, m ):
-    
-    usable = a[i]
-    
-    if usable:
+    res = 0
+    for i in range( 1, m ):
         
-        value = sum( getfactors( i )) - i
+        usable = a[i]
         
-        if value < m and value != i:
+        if usable:
             
-            value2 = sum( getfactors( value )) - value
+            value = sum( getfactors( i )) - i
             
-            if value2 == i:
-                print( i, value )
-                res += i + value
+            if value < m and value != i:
                 
-                a[i] = False
-                a[value] = False
+                value2 = sum( getfactors( value )) - value
                 
+                if value2 == i:
+                    print( i, value )
+                    res += i + value
+                    
+                    a[i] = False
+                    a[value] = False
+                    
 
-print( res )
-    
+    return res
+
+if __name__ == "__main__":
+    print( run())    

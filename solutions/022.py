@@ -17,7 +17,7 @@ import io
 alphabet = ':' + string.ascii_uppercase
 
 
-def getscore( s ):
+def getscore( s: str ) -> str:
     
     res = 0
     
@@ -27,45 +27,49 @@ def getscore( s ):
         
     return res
 
-res = []
-with open( 'names.txt', 'r' ) as f:
+def run() -> int:
+    res = []
+    with open( 'names.txt', 'r' ) as f:
 
-    for line in f:
-        line = line.strip()[1:-1]
-        
-        if res == [] or line > res[-1]:
+        for line in f:
+            line = line.strip()[1:-1]
             
-            res.append( line )
-            
-        else:
-            
-            i = -2
-            
-            while True:
-                if line > res[i]:
-                    res = res[:i+1] + [line] + res[i+1:]
-                    break
-                    
-                if res[0] == res[i]:
-                    
-                    res = [line] + res
-                    break
-                    
-                i -= 1
-        
+            if res == [] or line > res[-1]:
                 
-      
-result = 0
+                res.append( line )
+                
+            else:
+                
+                i = -2
+                
+                while True:
+                    if line > res[i]:
+                        res = res[:i+1] + [line] + res[i+1:]
+                        break
+                        
+                    if res[0] == res[i]:
+                        
+                        res = [line] + res
+                        break
+                        
+                    i -= 1
+            
+                    
+        
+    result = 0
 
-i = 0
-for i in range( len( res )):
-    
-    name = res[i]
-    
-    result += getscore( name ) * ( i + 1 )
+    i = 0
+    for i in range( len( res )):
+        
+        name = res[i]
+        
+        result += getscore( name ) * ( i + 1 )
 
-print( result ) 
-    
+    return result
+
+
+if __name__ == "__main__":
+    print( run())
     
 
 

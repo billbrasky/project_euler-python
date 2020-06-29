@@ -10,12 +10,16 @@ Find the sum of the digits in the number 100!
 
 import math
 
-s = str( math.factorial( 100 ))
+def run() -> int:
+    s = str( math.factorial( 100 ))
 
-res = 0
+    res = 0
 
-for letter in s:
-    
-    res += int( letter )
-    
-print( res )
+    for letter in s:
+        
+        res += int( letter )
+        
+    return res
+
+if __name__ == "__main__":
+    print( run())

@@ -19,45 +19,43 @@ two abundant numbers.
 """
 
 from util.functions import getfactors
-import time
 
-start = time.time()
+def run() -> int:
+    m = 28123
 
-m = 28123
-
-data = [0]+[1]*(m-1) + [0]
-abunds = []
-for i in range( 12, m+1 ):
-    if data[i] == 0:
-        abunds.append( i )
-        continue
+    data = [0]+[1]*(m-1) + [0]
+    abunds = []
+    for i in range( 12, m+1 ):
+        if data[i] == 0:
+            abunds.append( i )
+            continue
+            
+        s = sum( getfactors( i )) - i
         
-    s = sum( getfactors( i )) - i
-    
-    if s > i:
-        test = i + i
-        while test <= m:
-            data[test] = 0
-            test += i
-               
-        abunds.append( i )
+        if s > i:
+            test = i + i
+            while test <= m:
+                data[test] = 0
+                test += i
+                
+            abunds.append( i )
 
-for x in abunds:
-    for y in abunds:
-        r = x + y
-        
-        if r < m:
-            data[r] = 0
-        
+    for x in abunds:
+        for y in abunds:
+            r = x + y
+            
+            if r < m:
+                data[r] = 0
+            
 
 
-res = 0
-for i in range( len( data )):
-    if data[i] == 1:
-#        print( i )
-        res += i
-print( res )
-        
-print( time.time() - start )
-    
+    res = 0
+    for i in range( len( data )):
+        if data[i] == 1:
+    #        print( i )
+            res += i
+    return res
+
+if __name__ == "__main__":
+    print( res())        
     
