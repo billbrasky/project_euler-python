@@ -6,15 +6,9 @@ import time
 
 from typing import Tuple, Union, List
 
-args = sys.argv
 
-if len( args ) <= 1:
-    print( 'Please specifiy the problem number to test.' )
-    print( 'Ex. ./run 23' )
-    exit()
-
-tests = args[1:]
-
+# Checks if provided test is numeric 1 to 3 digits
+#
 def validateTest( test: str ) -> bool:
 
 
@@ -24,7 +18,9 @@ def validateTest( test: str ) -> bool:
         return False
 
     return True
-    
+
+# Pads the test on the left to be 3 digits
+#   
 def padTestPath( test: str ) -> str:
 
     while len( test ) != 3:
@@ -32,37 +28,34 @@ def padTestPath( test: str ) -> str:
 
     return test
 
-def computeTests( tests: List[str] ) -> None:
+# Processes a test to compare its solution to the answers.
+# 
+def processTest( test: str ) -> None:
 
-    for test in tests:
+    test_is_valid = validateTest( test )
 
-        test_is_valid = validateTest( test )
+    test = padTestPath( test )
 
-        if test_is_valid:
+    if test_is_valid:
 
-            testpath = f'solutions/{test}.py'
-            importpath = f'solutions.{test}'
-            answers = getAnswers()
+        testpath = f'solutions/{test}.py'
+        answers = getAnswers()
 
-            my_answer, duration = getMyAnswer( testpath )
-
-
-            answer = answers[test]
-            print( len( my_answer), len( answer ))
-            if my_answer == answer:
-                print( 'CORRECT!' )
-                print( f'{my_answer} == {answer}' )
-                print( duration )
-
-            else:
-                print( 'INCORRECT!' )
-                print( f'{my_answer} != {answer}' )
+        my_answer, duration = getMyAnswer( testpath )
 
 
+        answer = answers[test]
+        if my_answer == answer:
+            print( 'CORRECT!' )
+            print( f'{my_answer} == {answer}' )
+            print( duration )
 
+        else:
+            print( 'INCORRECT!' )
+            print( f'{my_answer} != {answer}' )
 
-
-
+# Gets all of the answers from a provided file
+#
 def getAnswers():
     answers = {}
 
@@ -74,14 +67,15 @@ def getAnswers():
             answer = m.group(2)
 
             answers[problem] = answer
-        
     return answers        
 
-def getMyAnswer( testpath: str ) -> Tuple( Union[str, None], Union[float, None] ):
+# Executes the script at a specific path
+#
+def getMyAnswer( testpath: str ) -> Tuple[Union[str, None], Union[float, None]]:
 
     my_answer = None
     duration = None
-
+    importpath = testpath.replace( '/', '.' )[:-3]
     if os.path.exists( testpath ):
         module = importlib.import_module( importpath )
 
@@ -96,22 +90,21 @@ def getMyAnswer( testpath: str ) -> Tuple( Union[str, None], Union[float, None] 
     return (my_answer, duration)
 
 
+if __name__ == "__main__":
+    
+    args = sys.argv
+
+    if len( args ) <= 1:
+        print( 'Please specifiy the problem number to test.' )
+        print( 'Ex. ./run 23' )
+        exit()
+
+    tests = args[1:]
+
+    for test in tests:
+        processTest( test )
 
 
 
-# name=$1
 
-# if [ ${#1} -eq 1 ]; then
 
-#     name="00${1}"
-
-# elif [ ${#1} -eq 2 ]; then
-#     name="0${1}"
-
-# else
-#     name=$1
-# fi
-
-# path="solutions/${name}.py"
-
-# python $path
