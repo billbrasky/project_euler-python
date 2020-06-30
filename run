@@ -2,7 +2,7 @@
 
 import sys, re
 import os, importlib
-import time
+import time, glob
 
 from typing import Tuple, Union, List
 
@@ -30,29 +30,22 @@ def padTestPath( test: str ) -> str:
 
 # Processes a test to compare its solution to the answers.
 # 
-def processTest( test: str ) -> None:
+def processTest( testpath: str ) -> None:
 
-    test_is_valid = validateTest( test )
+    answers = getAnswers()
 
-    test = padTestPath( test )
-
-    if test_is_valid:
-
-        testpath = f'solutions/{test}.py'
-        answers = getAnswers()
-
-        my_answer, duration = getMyAnswer( testpath )
+    my_answer, duration = getMyAnswer( testpath )
 
 
-        answer = answers[test]
-        if my_answer == answer:
-            print( 'CORRECT!' )
-            print( f'{my_answer} == {answer}' )
-            print( duration )
+    answer = answers[re.search( r'(\d{3})', testpath ).group( 1 )]
+    if my_answer == answer:
+        print( 'CORRECT!' )
+        print( f'{my_answer} == {answer}' )
+        print( duration )
 
-        else:
-            print( 'INCORRECT!' )
-            print( f'{my_answer} != {answer}' )
+    else:
+        print( 'INCORRECT!' )
+        print( f'{my_answer} != {answer}' )
 
 # Gets all of the answers from a provided file
 #
@@ -101,7 +94,25 @@ if __name__ == "__main__":
 
     tests = args[1:]
 
+    all = False
+    if tests[0].lower() == 'all':
+        tests = list( glob.glob('solutions/*.py' ))
+        tests.sort()
+        all = True
+
+    
+
     for test in tests:
+        if not all:
+            test_is_valid = validateTest( test )
+
+            test = padTestPath( test )
+
+            if test_is_valid:
+                testpath = f'solutions/{test}.py'
+
+                processTest( testpath )
+
         processTest( test )
 
 
