@@ -14,17 +14,21 @@ What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed 
 the same way?
 """
 
-m = 1001
+def run() -> int:
+    m = 1001
 
-a = [x*2 for x in range( 1, m ) if  x*2 < m ]
-start = 2
-current = start
-res = 1
-for x in a:
+    a = [x*2 for x in range( 1, m ) if  x*2 < m ]
+    start = 2
+    current = start
+    res = 1
+    for x in a:
 
-    end = current + x*4 - 1
-    wanted = [end - x*i for i in range( 4 )]
-    res += sum( wanted )
-    current = end + 1
+        end = current + x*4 - 1
+        wanted = [end - x*i for i in range( 4 )]
+        res += sum( wanted )
+        current = end + 1
 
-print( res )
+    return res
+
+if __name__ == "__main__":
+    print( run())

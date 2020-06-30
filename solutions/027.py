@@ -32,36 +32,40 @@ consecutive values of n, starting with n=0.
 
 from util.functions import getfactors
 
-bsource = [0,0] + [1] * 1000
-options = []
-for i in range( 2, 1000 ):
-    
-    if bsource[i] == 1:
-        options.append( i )
-        step = i + i
-        while step < 1000:
-            bsource[step] = 0
-            step += i
 
 def func( a, b, n ):
     return n**2 + a*n + b
 
-res = (0, 0)
-aoptions = options + [-x for x in options]
-for a in aoptions:
-    for b in options:
+def run():
+    res = (0, 0)
+    bsource = [0,0] + [1] * 1000
+    options = []
+    for i in range( 2, 1000 ):
         
-        n = 0
-        while True:
+        if bsource[i] == 1:
+            options.append( i )
+            step = i + i
+            while step < 1000:
+                bsource[step] = 0
+                step += i
+    aoptions = options + [-x for x in options]
+    for a in aoptions:
+        for b in options:
             
-            val = func( a, b, n )
+            n = 0
+            while True:
+                
+                val = func( a, b, n )
 
-            if val < 0 or len( getfactors( val )) != 2:
-                break
-            
-            n += 1
+                if val < 0 or len( getfactors( val )) != 2:
+                    break
+                
+                n += 1
 
-        if n > res[1]:
-            res = (a*b, n)
-            
-print( res )
+            if n > res[1]:
+                res = (a*b, n)
+                
+    return res
+
+if __name__ == "__main__":
+    print( run())

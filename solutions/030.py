@@ -14,14 +14,18 @@ Find the sum of all the numbers that can be written as the sum of fifth powers o
 their digits.
 """
 
-n = 1000
-res = 0
-while n < 10**6:
-#    print( n )
-    s = sum( [int( x ) ** 5 for x in str( n )] )
-    
-    if s == n:
-        res += n
-    n += 1
-    
-print( res )
+def run() -> int:
+    n = 1000
+    res = 0
+    while n < 10**6:
+    #    print( n )
+        s = sum( [int( x ) ** 5 for x in str( n )] )
+        
+        if s == n:
+            res += n
+        n += 1
+        
+    return res
+
+if __name__ == "__main__":
+    print( run())

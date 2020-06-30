@@ -14,27 +14,31 @@ and 2 ≤ b ≤ 100?
 # Broken how to capture 4^54 == 8^36
 import math
 
-d = {}
-m = 100
-for i in range( 2, m+1 ):
-    for power in range( 2, m+1 ):
-    #   if d.get( i ) is not None:
-    #      continue
-        
-        if d.get( i ) is None:
-            d[i] = m - 1
-        if i**power <= m:
-
-            drop =  m/power
-            print( drop, i, power, i**power )
-            tenth = int( str( drop ).split( '.' )[1][0] )
+def run() -> int:
+    d = {}
+    m = 100
+    for i in range( 2, m+1 ):
+        for power in range( 2, m+1 ):
+        #   if d.get( i ) is not None:
+        #      continue
             
-            if 0 <= tenth < 5:
-                drop = math.ceil( drop )
+            if d.get( i ) is None:
+                d[i] = m - 1
+            if i**power <= m:
+
+                drop =  m/power
+                print( drop, i, power, i**power )
+                tenth = int( str( drop ).split( '.' )[1][0] )
                 
-            else: # 5 <= tenth < 9
-                drop = math.floor( drop )
-            d[i**power] = m - drop
-            
+                if 0 <= tenth < 5:
+                    drop = math.ceil( drop )
+                    
+                else: # 5 <= tenth < 9
+                    drop = math.floor( drop )
+                d[i**power] = m - drop
+                
 
-print( sum( d.values()))
+    return sum( d.values())
+
+if __name__ == "__main__":
+    print( run())
