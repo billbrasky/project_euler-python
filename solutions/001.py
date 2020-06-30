@@ -14,14 +14,9 @@ def run() -> int:
 
     for i in range( n ):
         
-        if i%3 == 0:
-            
+        if i%3 == 0 or i%5 == 0:
             res += i
-            
-        elif i%5 == 0:
-            
-            res += i
-    
+
     return res
         
 if __name__ == '__main__':
