@@ -101,7 +101,6 @@ if __name__ == "__main__":
         all = True
 
     
-
     for test in tests:
         if not all:
             test_is_valid = validateTest( test )
@@ -110,10 +109,10 @@ if __name__ == "__main__":
 
             if test_is_valid:
                 testpath = f'solutions/{test}.py'
-
                 processTest( testpath )
 
-        processTest( test )
+        else:
+            processTest( test )
 
 
 
