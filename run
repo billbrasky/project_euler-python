@@ -30,14 +30,8 @@ def padTestPath( test: str ) -> str:
 
 # Processes a test to compare its solution to the answers.
 # 
-def processTest( testpath: str ) -> None:
+def processTest( my_answer: str, answer: str, duration: float ) -> None:
 
-    answers = getAnswers()
-
-    my_answer, duration = getMyAnswer( testpath )
-
-
-    answer = answers[re.search( r'(\d{3})', testpath ).group( 1 )]
     if my_answer == answer:
         print( 'CORRECT!' )
         print( f'{my_answer} == {answer}' )
@@ -62,6 +56,18 @@ def getAnswers():
             answers[problem] = answer
     return answers        
 
+def log( test: str, flag: str, start_time: float ) -> None:
+
+    if not os.path.exists( './log/' ):
+        os.mkdir( './log/' )
+
+    with open( f'./log/{start_time}.txt', 'a' ) as f:
+        f.write( f'{test}  --  {flag}\n' )
+
+
+    
+
+
 # Executes the script at a specific path
 #
 def getMyAnswer( testpath: str ) -> Tuple[Union[str, None], Union[float, None]]:
@@ -73,8 +79,13 @@ def getMyAnswer( testpath: str ) -> Tuple[Union[str, None], Union[float, None]]:
         module = importlib.import_module( importpath )
 
         start = time.time()
-        my_answer = str( module.run())
-        duration = time.time() - start
+        try:
+            my_answer = str( module.run())
+            duration = time.time() - start
+        
+        except:
+            my_answer = 'FAILURE'
+            duration = None
 
     else:
 
@@ -100,7 +111,8 @@ if __name__ == "__main__":
         tests.sort()
         all = True
 
-    
+    answers = getAnswers()
+    begin_tests = time.time()
     for test in tests:
         if not all:
             test_is_valid = validateTest( test )
@@ -109,12 +121,17 @@ if __name__ == "__main__":
 
             if test_is_valid:
                 testpath = f'solutions/{test}.py'
-                processTest( testpath )
+                my_answer, duration = getMyAnswer( testpath )
 
         else:
-            processTest( test )
+            my_answer, duration = getMyAnswer( testpath )
 
-
+        answer = answers[test]
+        if my_answer is None:
+            log( test, 'Failure', begin_tests )
+        else:
+            log( test, 'Completed', begin_tests )
+        processTest( my_answer, answer, duration )
 
 
 
