@@ -58,11 +58,20 @@ def getAnswers():
 
 def log( test: str, flag: str, start_time: float ) -> None:
 
-    if not os.path.exists( './log/' ):
-        os.mkdir( './log/' )
+    log_path = './log/'
 
-    with open( f'./log/{start_time}.txt', 'a' ) as f:
-        f.write( f'{test}  --  {flag}\n' )
+    if not os.path.exists( log_path ):
+        os.mkdir( log_path )
+
+    log_path += f'{start_time}.txt'
+
+    if not os.path.exists( log_path ):
+        with open( log_path, 'w' ) as f:
+
+            f.write( 'Problem\t\tCompleted\t\tPass\n' )
+
+    with open( log_path, 'a' ) as f:
+        f.write( f'{test}\t\t\t{flag}\t\tNot sure\n' )
 
 
     
