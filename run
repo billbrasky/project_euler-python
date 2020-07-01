@@ -83,7 +83,11 @@ def getMyAnswer( testpath: str ) -> Tuple[Union[str, None], Union[float, None]]:
 
     my_answer = None
     duration = None
-    importpath = testpath.replace( '/', '.' )[:-3]
+    if '/' in testpath:
+        importpath = testpath.replace( '/', '.' )[:-3]
+    else:
+        importpath = testpath.replace( '\\', '.' )[:-3]
+
     if os.path.exists( testpath ):
         module = importlib.import_module( importpath )
 
@@ -133,6 +137,8 @@ if __name__ == "__main__":
                 my_answer, duration = getMyAnswer( testpath )
 
         else:
+            testpath = test
+            test = re.search( r'[\\/](\d{3}).py', testpath ).groups(1)[0]
             my_answer, duration = getMyAnswer( testpath )
 
         answer = answers[test]
