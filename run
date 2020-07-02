@@ -30,16 +30,12 @@ def padTestPath( test: str ) -> str:
 
 # Processes a test to compare its solution to the answers.
 # 
-def processTest( my_answer: str, answer: str, duration: float ) -> None:
-
+def processTest( my_answer: str, answer: str, duration: float ) -> bool:
+    passed = False
     if my_answer == answer:
-        print( 'CORRECT!' )
-        print( f'{my_answer} == {answer}' )
-        print( duration )
+        passed = True
 
-    else:
-        print( 'INCORRECT!' )
-        print( f'{my_answer} != {answer}' )
+    return passed        
 
 # Gets all of the answers from a provided file
 #
@@ -53,10 +49,10 @@ def getAnswers():
             problem = m.group(1)
             answer = m.group(2)
 
-            answers[problem] = answer
+            answers[problem] = answer.strip()
     return answers        
 
-def log( test: str, flag: str, start_time: float ) -> None:
+def log( test: str, completed: bool, passed: bool, time: float, start_time: float ) -> None:
 
     log_path = './log/'
 
@@ -68,10 +64,10 @@ def log( test: str, flag: str, start_time: float ) -> None:
     if not os.path.exists( log_path ):
         with open( log_path, 'w' ) as f:
 
-            f.write( 'Problem\t\tCompleted\t\tPass\n' )
+            f.write( 'Problem\t\tCompleted\t\tPass\t\ttime\n' )
 
     with open( log_path, 'a' ) as f:
-        f.write( f'{test}\t\t\t{flag}\t\tNot sure\n' )
+        f.write( f'{test}\t\t\t{completed}\t\t{passed}\t\t{time}\n' )
 
 
     
@@ -142,11 +138,11 @@ if __name__ == "__main__":
             my_answer, duration = getMyAnswer( testpath )
 
         answer = answers[test]
+        passed = processTest( my_answer, answer, duration )
         if my_answer is None:
-            log( test, 'Failure', begin_tests )
+            log( test, 'Failure', 'Failure', duration, begin_tests )
         else:
-            log( test, 'Completed', begin_tests )
-        processTest( my_answer, answer, duration )
+            log( test, 'Completed', passed, duration, begin_tests )
 
 
 
