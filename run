@@ -1,11 +1,28 @@
 #! python
+"""Project Euler.
+
+Usage:
+    ./run <x> ...
+    ./run all
+    ./run (-h | --help)
+
+Examples:
+    ./run 1
+    ./run 1 2 3 4
+    ./run all
+
+Options:
+    -h --help     Show this screen.
+"""
+from docopt import docopt
 
 from util.run_tools import *
 import time, os
 from glob import glob
 
 if __name__ == "__main__":
-    
+    arguments = docopt( __doc__ )
+    print( arguments )
     args = sys.argv
 
     if len( args ) <= 1:
@@ -17,7 +34,7 @@ if __name__ == "__main__":
 
     all = False
     if tests[0].lower() == 'all':
-        tests = list( glob.glob('solutions/*.py' ))
+        tests = list( glob('solutions/*.py' ))
         tests.sort()
         all = True
 
