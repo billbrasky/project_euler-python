@@ -2,17 +2,19 @@
 """Project Euler.
 
 Usage:
-    ./run <x> ...
-    ./run all
+    ./run (-p | --problem) <x> ...
+    ./run (-a | --all)
     ./run (-h | --help)
 
 Examples:
-    ./run 1
-    ./run 1 2 3 4
-    ./run all
+    ./run -p 1
+    ./run -p 1 2 3 4
+    ./run -a
 
 Options:
-    -h --help     Show this screen.
+    -h --help       Show this screen.
+    -a --all        Run all tests.
+    -p --problem    Run any number of tests.
 """
 from docopt import docopt
 
@@ -22,26 +24,34 @@ from glob import glob
 
 if __name__ == "__main__":
     arguments = docopt( __doc__ )
-    print( arguments )
-    args = sys.argv
 
-    if len( args ) <= 1:
+    if arguments['--problem'] and arguments['<x>'] == []:
         print( 'Please specifiy the problem number to test.' )
-        print( 'Ex. ./run 23' )
+        print( 'Ex. ./run -p 23' )
         exit()
 
-    tests = args[1:]
+    elif not arguments['--problem'] and arguments['<x>'] != []:
+        print( 'Please follow rules.' )
+        insert  = ' '.join( arguments['<x>'] )
+        print( f'./run -p {insert} NOT ./run {insert}' )
+        exit()
 
-    all = False
-    if tests[0].lower() == 'all':
+    
+
+
+    test_all = arguments['--all']
+    if test_all:
         tests = list( glob('solutions/*.py' ))
         tests.sort()
-        all = True
+
+    else:
+        tests = arguments['<x>']
+
 
     answers = getAnswers()
     begin_tests = time.time()
     for test in tests:
-        if not all:
+        if not test_all:
 
             pe_problem = ProjectEuler( test = test )
 
