@@ -5,6 +5,7 @@ Usage:
     ./run (-p | --problem) <x> ...
     ./run (-a | --all)
     ./run (-h | --help)
+    ./run (-c | --clear)
 
 Examples:
     ./run -p 1
@@ -15,11 +16,12 @@ Options:
     -h --help       Show this screen.
     -a --all        Run all tests.
     -p --problem    Run any number of tests.
+    -c --clear      Clear the logs.
 """
 from docopt import docopt
 
 from util.run_tools import *
-import time, os
+import time, os, shutil
 from glob import glob
 
 if __name__ == "__main__":
@@ -36,6 +38,16 @@ if __name__ == "__main__":
         print( f'./run -p {insert} NOT ./run {insert}' )
         exit()
 
+    elif arguments['--clear']:
+        
+        log_path = './log'
+
+        if os.path.exists( log_path ):
+            shutil.rmtree( log_path )
+
+        os.mkdir( log_path )
+
+        exit()
     
 
 
